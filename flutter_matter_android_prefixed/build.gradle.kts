@@ -56,13 +56,17 @@ afterEvaluate {
                 version = "1.0.0"
 
                 // 使用 bundleReleaseAar 任务
-                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+//                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
 
                 // 添加源码包
-                artifact(tasks.create<Jar>("sourceJar") {
-                    from(android.sourceSets["main"].java.srcDirs)
-                    archiveClassifier.set("sources")
-                })
+//                artifact(tasks.create<Jar>("sourceJar") {
+//                    from(android.sourceSets["main"].java.srcDirs)
+//                    archiveClassifier.set("sources")
+//                })
+
+                afterEvaluate {
+                    from(components.findByName("release"))
+                }
             }
         }
     }
