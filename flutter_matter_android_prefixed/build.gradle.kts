@@ -10,7 +10,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
         targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -50,7 +50,7 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            create("release", MavenPublication::class) {
+            create<MavenPublication>("release") {
                 groupId = "com.tyx.flutter_matter"
                 artifactId = "flutter_matter_android_prefixed"
                 version = "1.0.0"
@@ -59,10 +59,11 @@ afterEvaluate {
 //                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
 
                 // 添加源码包
-//                artifact(tasks.create<Jar>("sourceJar") {
-//                    from(android.sourceSets["main"].java.srcDirs)
-//                    archiveClassifier.set("sources")
-//                })
+//            artifact(tasks.create<Jar>("sourceJar") {
+//                from(android.sourceSets["main"].java.srcDirs)
+//                archiveClassifier.set("sources")
+//            })
+                artifact("deploy/flutter_matter_android_prefixed-release.aar")
 
                 afterEvaluate {
                     from(components.findByName("release"))
@@ -71,3 +72,4 @@ afterEvaluate {
         }
     }
 }
+
