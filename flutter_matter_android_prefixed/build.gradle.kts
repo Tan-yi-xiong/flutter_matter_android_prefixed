@@ -1,6 +1,8 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    apply {
+        id("maven-publish")
+        id("com.android.library")
+    }
 }
 
 android {
@@ -8,11 +10,8 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.flutter_matter_android_prefixed"
         minSdk = 24
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -30,17 +29,41 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
+//    kotlinOptions {
+//        jvmTarget = "1.8"
+//    }
 }
 
 dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+//    implementation(libs.androidx.core.ktx)
+//    implementation(libs.androidx.appcompat)
+//    implementation(libs.material)
+    implementation(fileTree("libs") {
+        include("*.jar", "*.so")
+    })
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create("release", MavenPublication::class) {
+                groupId = "com.tyx.flutter_matter"
+                artifactId = "flutter_matter_android_prefixed"
+                version = "1.0.0"
+
+                // 使用 bundleReleaseAar 任务
+                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+
+                // 添加源码包
+                artifact(tasks.create<Jar>("sourceJar") {
+                    from(android.sourceSets["main"].java.srcDirs)
+                    archiveClassifier.set("sources")
+                })
+            }
+        }
+    }
 }

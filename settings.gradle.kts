@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "flutter_matter_android"
 include(":app")
- 
+include(":flutter_matter_android_prefixed")
