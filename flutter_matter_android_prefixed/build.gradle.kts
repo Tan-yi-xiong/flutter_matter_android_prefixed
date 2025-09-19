@@ -34,6 +34,11 @@ android {
             jniLibs.srcDir("libs/jniLibs")
         }
     }
+    packagingOptions {
+      jniLibs {
+        useLegacyPackaging = true
+      }
+    }
 //    kotlinOptions {
 //        jvmTarget = "1.8"
 //    }
