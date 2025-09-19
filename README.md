@@ -1,3 +1,13 @@
+## 使用
+
+```Groovy
+dependencies {
+  ....
+  implementation 'com.github.Tan-yi-xiong:flutter_matter_android_prefixed:lastVersion'
+}
+```
+
+
 ## 打包发布步骤
 
 1. 使用./gradlew flutter_matter_android_prefixed:assemble得到.aar文件
