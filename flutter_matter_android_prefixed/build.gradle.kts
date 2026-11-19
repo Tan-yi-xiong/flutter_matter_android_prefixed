@@ -63,7 +63,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 groupId = "com.tyx.flutter_matter"
                 artifactId = "flutter_matter_android_prefixed"
-                version = "1.0.0"
+                version = "1.0.6"
 
                 // 使用 bundleReleaseAar 任务
 //                artifact("$buildDir/outputs/aar/${project.name}-release.aar")
